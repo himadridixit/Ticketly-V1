@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="display-4 mx-auto">Ticketly</h1>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+            {% for venue in venues %}
+            <div>
+                <h2>{{ venue.Vname }}</h2>
+                {{venue["place"]}}
+                <p>
+                    {% for show in venue['shows']%}
+                    <ul>
+                    <a href="/show/book/{{show['show_id']}}">{{show['Sname']}}</a>
+                    <br>
+                    {% if show['rating'] != Null %}
+                    Rating : {{show['rating']}}
+                    {% elif show['rating'] == 0.0 %}
+                    Rating : No ratings yet.
+                    {%endif%}
+                    <br>
+                    Tickets Remaining : {{ show['tickets_remaining'] }}
+                    <br>
+                    </ul>
+                    {%endfor%}
+                </p>
+            </div>
+            {%endfor%}
+            </div>
+            <div class="col-md-4">
+                
+                {% include 'sidebar.html' %}
+                <br>
+                <a href="/bookings">History of bookings</a>
+                <br><br>
+                <h4>Search for shows:</h4>
+                <form method="POST" action="/user/dashboard">
+                    Rating:
+                    <br>
+                    <select name="rating">
+                        <option value="5">5</option>
+                        <option value="4">4</option>
+                        <option value="3">3</option>
+                        <option value="2">2</option>
+                        <option value="1">1</option>
+                        <option value="0" selected>0</option>
+                    </select>
+                    <!-- <input type="range" class="form-range" name="rating" min="0" max="5" style="width: 150px;"> -->
+                    <br>
+                    Location:
+                    <br>
+                    <select name="location">
+                        {% for location in locations %}
+                            <option value="{{location}}">{{location}}</option>
+                        {%endfor%}
+                        <option value="" selected>None</option>
+                    </select>
+                    <br>
+                    Tags:
+                    <br>
+                    <select name="tags">
+                        {% for tag in tags %}
+                            <option value="{{tag}}">{{tag}}</option>
+                        {%endfor%}
+                        <option value="" selected>None</option>
+                    </select>
+                    <br>
+                    Show Name:
+                    <br>
+                    <input type="text" name="show_name">
+                    <br>
+                    Venue Name:
+                    <br>
+                    <input type="text" name="venue_name">
+                    <br>
+                    <input type="submit" value="Search">
+                </form>
+            </div>
+        </div>
+                
+            
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Show</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+        <div class="col-md-8">
+        <form method="POST" action="/show/{{show.show_id}}/edit">
+            <label> Show name </label>
+            <input name="name" type="text" value="{{show.name}}" required/>
+            <br><br>
+            <label> Tags </label>
+            <input name="tags" type="text" value="{{show.tags}}" required/>
+            <br><br>
+            <label> Price </label>
+            <input name="price" type="number" value="{{show.price}}" required/>
+            <br><br>
+            <label> Date </label>
+            <input name="date" type="date" value="{{show.date}}" required/>
+            <br><br>
+            <label> Time </label>
+            <input name="time" type="time" value="{{show.time}}"required/>
+            <br><br>
+            <input type="submit" value="edit">
+            <br><br>
+        </form>
+    </div>
+    </div>
+    <div class="col-md-4">
+        {% include 'sidebar.html' %}
+    </div>
+    </div>
+</body>
+</html>
